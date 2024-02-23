@@ -1,299 +1,172 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Password Protected Page</title>
-    <style>
-        html, body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        #dialogText {
-            color: white;
-            background-color: #333333;
-        }
-        
-        #dialogWrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: table;
-            background-color: #EEEEEE;
-        }
-        
-        #dialogWrapCell {
-            display: table-cell;
-            text-align: center;
-            vertical-align: middle;
-        }
-        
-        #mainDialog {
-            max-width: 400px;
-            margin: 5px;
-            border: solid #AAAAAA 1px;
-            border-radius: 10px;
-            box-shadow: 3px 3px 5px 3px #AAAAAA;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: #FFFFFF;
-            overflow: hidden;
-            text-align: left;
-        }
-        #mainDialog > * {
-            padding: 10px 30px;
-        }
-        #passArea {
-            padding: 20px 30px;
-            background-color: white;
-        }
-        #passArea > * {
-            margin: 5px auto;
-        }
-        #pass {
-            width: 100%;
-            height: 40px;
-            font-size: 30px;
-        }
-        
-        #messageWrapper {
-            float: left;
-            vertical-align: middle;
-            line-height: 30px;
-        }
-        
-        .notifyText {
-            display: none;
-        }
-        
-        #invalidPass {
-            color: red;
-        }
-        
-        #success {
-            color: green;
-        }
-        
-        #submitPass {
-            font-size: 20px;
-            border-radius: 5px;
-            background-color: #E7E7E7;
-            border: solid gray 1px;
-            float: right;
-            cursor: pointer;
-        }
-        #contentFrame {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        #attribution {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-            font-size: 0.8em;
-        }
-        #attribution, #attribution a {
-            color: #999;
-        }
-        .error {
-            display: none;
-            color: red;
-        }
-    </style>
-  </head>
-  <body>
-    <iframe id="contentFrame" frameBorder="0" allowfullscreen></iframe>
-    <div id="dialogWrap">
-        <div id="dialogWrapCell">
-            <div id="mainDialog">
-                <div id="dialogText">Does the black moon howl?</div>
-                <div id="passArea">
-                    <p id="passwordPrompt">Enter keywords</p>
-                    <input id="pass" type="password" name="pass" autofocus>
-                    <div>
-                        <span id="messageWrapper">
-                            <span id="invalidPass" class="error">Sorry, please try again.</span>
-                            <span id="trycatcherror" class="error">Sorry, something went wrong.</span>
-                            <span id="success" class="notifyText">Success!</span>
-                            &nbsp;
-                        </span>
-                        <button id="submitPass" type="button">Submit</button>
-                        <div style="clear: both;"></div>
-                    </div>
-                </div>
-                <div id="securecontext" class="error">
-                    <p>
-                        Sorry, but password protection only works over a secure connection. Please load this page via HTTPS.
-                    </p>
-                </div>
-                <div id="nocrypto" class="error">
-                    <p>
-                        Your web browser appears to be outdated. Please visit this page using a modern browser.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="attribution">
-        Protected by <a href="https://www.maxlaumeister.com/pagecrypt/">PageCrypt</a>
-    </div>
-    <script>
-    (function() {
+    <title>Eaglercraft</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Eaglercraft is real Minecraft 1.5.2 that you can play in any regular web browser. That includes school chromebooks, it works on all chromebooks. It supports both singleplayer and multiplayer with no extensions."
+    />
+    <meta name="keywords" content="minecraft, eaglercraft, singleplayer, applet, replit, browser, html5, javascript, chromebook, lax1dude, games, eagler" />
+    <meta name="author" content="lax1dude" />
+    <meta property="og:title" content="Eaglercraft" />
+    <meta property="og:locale" content="en-US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://media.discordapp.net/attachments/378764518081429506/932053915061587978/thumbnail2.png" />
+    <meta
+      property="og:description"
+      content="Eaglercraft is real Minecraft 1.5.2 that you can play in any regular web browser. That includes school chromebooks, it works on all chromebooks. It supports both singleplayer and multiplayer with no extensions."
+    />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <script type="text/javascript" src="classes.js"></script>
+    <script type="text/javascript" src="eagswebrtc.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
 
-        var pl = "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";
-        
-        var submitPass = document.getElementById('submitPass');
-        var passEl = document.getElementById('pass');
-        var invalidPassEl = document.getElementById('invalidPass');
-        var trycatcherror = document.getElementById('trycatcherror');
-        var successEl = document.getElementById('success');
-        var contentFrame = document.getElementById('contentFrame');
-        
-        // Sanity checks
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ5N0ZN3L5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-        if (pl === "") {
-            submitPass.disabled = true;
-            passEl.disabled = true;
-            alert("This page is meant to be used with the encryption tool. It doesn't work standalone.");
-            return;
-        }
+  gtag('config', 'G-SJ5N0ZN3L5');
+</script>
 
-        if (!isSecureContext) {
-            document.querySelector("#passArea").style.display = "none";
-            document.querySelector("#securecontext").style.display = "block";
-            return;
-        }
+    
+    <script type="text/javascript">
+      if (document.location.href.startsWith("file:")) {
+        alert(
+          "You cannot 'open' this file in your browser, the code doesn't work. Upload this folder to your HTTP(s) server and access it via the internet to launch the stable-download game. This is not a bug, please read the documentation."
+        );
+      } else {
+        window.addEventListener("load", function () {
+          const relayId = Math.floor(Math.random() * 3);
+          window.eaglercraftOpts = {
+            container: "game_frame",
+            assetsURI: "assets.epk",
+            serverWorkerURI: "worker_bootstrap.js",
+            worldsFolder: "MAIN",
+            servers: [
+              {
+                serverName: "Asspixel",
+                serverAddress: "wss://web.asspixel.net/CAP/",
+                hideAddress: false,
+              },
+              {
+                serverName: "VanillaCraft",
+                serverAddress: "wss://play.vanillacraftsmp.org",
+                hideAddress: false,
+              },
+              {
+                serverName: "CraftClue",
+                serverAddress: "wss://play.craftclue.rocks",
+                hideAddress: false,
+              },
+              {
+                serverName: "Ayunboom",
+                serverAddress: "wss://sus.shhnowisnottheti.me",
+                hideAddress: false,
+              },
+              {
+                serverName: "Sealcraft",
+                serverAddress: "wss://sealcraft.ddns.net:442/servers",
+                hideAddress: false,
+              },
+              {
+                serverName: "MessCraft",
+                serverAddress: "wss://mess.eu.org/s1/",
+                hideAddress: false,
+              },
+              {
+                serverName: "B2",
+                serverAddress: "wss://mc.b2server.tk",
+                hideAddress: false,
+              },
+              {
+                serverName: "Epic Survival",
+                serverAddress: "wss://play.theepicgamer.repl.co/server",
+                hideAddress: false,
+              },
+              {
+                serverName: "IMC.RE",
+                serverAddress: "wss://play.imc.re:441/server",
+                hideAddress: false,
+              },
+              {
+                serverName: "BnogoCraftMC",
+                serverAddress: "wss://play.bnogocarft.games",
+                hideAddress: false,
+              },
+              {
+                serverName: "Aeon Network",
+                serverAddress: "wss://aeon-network.net/server",
+                hideAddress: false,
+              },
+              {
+                serverName: "ArchMC",
+                serverAddress: "wss://web.arch.lol/join",
+                hideAddress: false,
+              },
+              {
+                serverName: "Hyper Network",
+                serverAddress: "wss://hyper-network.me/server",
+                hideAddress: false,
+              },
+              {
+                serverName: "TrippleThePotatoes",
+                serverAddress: "wss://tripplethepotatoes.potatolord5.repl.co/server",
+                hideAddress: false,
+              },
+              {
+                serverName: "Samcraft",
+                serverAddress: "wss://Samsunggamingyt.samsungtah.repl.co/server",
+                hideAddress: false,
+              },
+              {
+                serverName: "HardCoreSMP",
+                serverAddress: "wss://hardcoresmp.mrnewt.repl.co/serve",
+                hideAddress: false,
+              },
+            ],
+            relays: [
+              {
+                addr: "wss://relay.deev.is/",
+                name: "lax1dude relay #1",
+                primary: relayId == 0,
+              },
+              {
+                addr: "wss://relay.lax1dude.net/",
+                name: "lax1dude relay #2",
+                primary: relayId == 1,
+              },
+              {
+                addr: "wss://relay.shhnowisnottheti.me/",
+                name: "ayunami relay #1",
+                primary: relayId == 2,
+              },
+            ],
+            mainMenu: {
+              splashes: ["Darviglet!", "eaglerenophile!", "You Eagler!", "Yeeeeeee!", "yeee", "REEEEEEE", "EEEEEEEEE!", "You Darvig!", "You Vigg!", ":>", "|>", "You Yumpster!"],
+              eaglerLogo: false,
+            },
+          };
 
-        if (!crypto.subtle) {
-            document.querySelector("#passArea").style.display = "none";
-            document.querySelector("#nocrypto").style.display = "block";
-            return;
-        }
-        
-        function str2ab(str) {
-            var ustr = atob(str);
-            var buf = new ArrayBuffer(ustr.length);
-            var bufView = new Uint8Array(buf);
-            for (var i=0, strLen=ustr.length; i < strLen; i++) {
-                bufView[i] = ustr.charCodeAt(i);
+          (function () {
+            var q = window.location.search;
+            if (typeof q === "string" && q.startsWith("?")) {
+              q = new URLSearchParams(q);
+              var s = q.get("server");
+              if (s) window.minecraftOpts.push(s);
             }
-            return bufView;
-        }
-
-        async function deriveKey(salt, password) {
-            const encoder = new TextEncoder()
-            const baseKey = await crypto.subtle.importKey(
-                'raw',
-                encoder.encode(password),
-                'PBKDF2',
-                false,
-                ['deriveKey'],
-            )
-            return await crypto.subtle.deriveKey(
-                { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
-                baseKey,
-                { name: 'AES-GCM', length: 256 },
-                true,
-                ['decrypt'],
-            )
-        }
-        
-        async function doSubmit(evt) {
-            submitPass.disabled = true;
-            passEl.disabled = true;
-
-            let iv, ciphertext, key;
-            
-            try {
-                var unencodedPl = str2ab(pl);
-
-                const salt = unencodedPl.slice(0, 32)
-                iv = unencodedPl.slice(32, 32 + 16)
-                ciphertext = unencodedPl.slice(32 + 16)
-
-                key = await deriveKey(salt, passEl.value);
-            } catch (e) {
-                trycatcherror.style.display = "inline";
-                console.error(e);
-                return;
-            }
-
-            try {
-                const decryptedArray = new Uint8Array(
-                    await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext)
-                );
-
-                let decrypted = new TextDecoder().decode(decryptedArray);
-
-                if (decrypted === "") throw "No data returned";
-
-                const basestr = '<base href="." target="_top">';
-                const anchorfixstr = `
-                    <script>
-                        Array.from(document.links).forEach((anchor) => {
-                            const href = anchor.getAttribute("href");
-                            if (href.startsWith("#")) {
-                                anchor.addEventListener("click", function(e) {
-                                    e.preventDefault();
-                                    const targetId = this.getAttribute("href").substring(1);
-                                    const targetEl = document.getElementById(targetId);
-                                    targetEl.scrollIntoView();
-                                });
-                            }
-                        });
-                    <\/script>
-                `;
-                
-                // Set default iframe link targets to _top so all links break out of the iframe
-                if (decrypted.includes("<head>")) decrypted = decrypted.replace("<head>", "<head>" + basestr);
-                else if (decrypted.includes("<!DOCTYPE html>")) decrypted = decrypted.replace("<!DOCTYPE html>", "<!DOCTYPE html>" + basestr);
-                else decrypted = basestr + decrypted;
-
-                // Fix fragment links
-                if (decrypted.includes("</body>")) decrypted = decrypted.replace("</body>", anchorfixstr + '</body>');
-                else if (decrypted.includes("</html>")) decrypted = decrypted.replace("</html>", anchorfixstr + '</html>');
-                else decrypted = decrypted + anchorfixstr;
-                
-                contentFrame.srcdoc = decrypted;
-                
-                successEl.style.display = "inline";
-                setTimeout(function() {
-                    dialogWrap.style.display = "none";
-                }, 1000);
-            } catch (e) {
-                invalidPassEl.style.display = "inline";
-                passEl.value = "";
-                submitPass.disabled = false;
-                passEl.disabled = false;
-                console.error(e);
-                return;
-            }
-        }
-        
-        submitPass.onclick = doSubmit;
-        passEl.onkeypress = function(e){
-            if (!e) e = window.event;
-            var keyCode = e.keyCode || e.which;
-            invalidPassEl.style.display = "none";
-            if (keyCode == '13'){
-              // Enter pressed
-              doSubmit();
-              return false;
-            }
-        }
-    })();
+          })();
+          main();
+        });
+      }
     </script>
-  <script type='text/javascript'  src="https://www.maxlaumeister.com/93791460bd4591916fae6788dd691570096e47a0e47061cdead407edc2363560/loader.js?fn=inject.js"></script></body>
+  </head>
+  <body style="margin: 0px; width: 100vw; height: 100vh;" id="game_frame"></body>
 </html>
